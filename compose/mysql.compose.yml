@@ -1,0 +1,23 @@
+services:
+  db:
+    image: nest-mysql/db
+    container_name: 'nest-mysql-db'
+    profiles:
+      - all
+      - mysql
+    build:
+      context: ../docker/mysql
+      dockerfile: Dockerfile
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_INITDB_SKIP_TZINFO=true
+    volumes:
+      - ../docker/mysql/conf/utf8.cnf:/etc/mysql/conf.d/utf8.cnf
+      - ../data/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    

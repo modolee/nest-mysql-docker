@@ -1,0 +1,33 @@
+services:
+  api:
+    image: nest-mysql/api
+    container_name: 'nest-mysql-api'
+    profiles:
+      - all
+      - api
+    build:
+      context: ../modules/api
+      dockerfile: Dockerfile
+    volumes:
+      - ../modules/api:/usr/src/app
+      - /usr/src/app/node_modules/bcrypt
+    environment:
+      - API_PORT=${API_PORT}
+      - MYSQL_HOST=db
+      - MYSQL_PORT=${MYSQL_PORT}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    ports:
+      - '${API_PORT}:${API_PORT}'
+    restart: unless-stopped
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '5'
