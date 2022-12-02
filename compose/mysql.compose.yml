@@ -1,6 +1,7 @@
 services:
   db:
     image: nest-mysql/db
+    platform: linux/amd64 # Mac M1, M2를 위한 설정
     container_name: 'nest-mysql-db'
     profiles:
       - all

@@ -1,3 +1,3 @@
-CREATE USER 'admin'@'%' IDENTIFIED BY 'admin';
+CREATE USER 'admin'@'%' IDENTIFIED BY 'Ab1234567*';
 GRANT SELECT ON *.* TO 'admin'@'%';
 FLUSH PRIVILEGES;
